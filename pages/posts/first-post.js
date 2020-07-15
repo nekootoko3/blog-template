@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Head from "next/head";
 import Layout from "../../components/layout";
+import styled from "styled-components";
 
 export default function FirstPost() {
   return (
@@ -8,7 +9,7 @@ export default function FirstPost() {
       <Head>
         <title>First Post</title>
       </Head>
-      <h1>FirstPost</h1>
+      <Title>FirstPost</Title>
       <h2>
         <Link href="/">
           <a>Back to home</a>
@@ -17,3 +18,7 @@ export default function FirstPost() {
     </Layout>
   );
 }
+
+const Title = styled.div`
+  color: ${({ theme }) => theme.colors.primary};
+`;
