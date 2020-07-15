@@ -39,7 +39,7 @@ function Layout({ children, home }) {
             </Link>
             <Heading>
               <Link href="/">
-                <BackToHome>{name}</BackToHome>
+                <NameLink>{name}</NameLink>
               </Link>
             </Heading>
           </>
@@ -47,11 +47,11 @@ function Layout({ children, home }) {
       </Header>
       <main>{children}</main>
       {!home && (
-        <div>
+        <BackToHome>
           <Link href="/">
             <a>← Back to home</a>
           </Link>
-        </div>
+        </BackToHome>
       )}
     </Container>
   );
@@ -79,6 +79,10 @@ const HeaderHomeImage = styled.img`
   width: 8rem;
   height: 8rem;
   border-radius: 50%;
+`;
+
+const NameLink = styled.a`
+  color: inherit;
 `;
 
 const BackToHome = styled.a`

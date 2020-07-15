@@ -19,6 +19,4 @@ export default function FirstPost() {
   );
 }
 
-const Title = styled.div`
-  color: ${({ theme }) => theme.colors.primary};
-`;
+const Title = styled.div``;
