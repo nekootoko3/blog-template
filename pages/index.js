@@ -1,5 +1,7 @@
 import Head from "next/head";
 import styled from "styled-components";
+import Link from "next/link";
+import Date from "../components/date";
 import { headingMd, headingLg } from "../styles/font";
 import Layout, { siteTitle } from "../components/layout";
 import { getSortedPostsData } from "../lib/posts";
@@ -20,12 +22,14 @@ export default function Home({ allPostsData }) {
         <HeadingBlogTitle>Blog</HeadingBlogTitle>
         <BlogList>
           {allPostsData.map(({ id, date, title }) => (
-            <BlogListItem>
-              {title}
+            <BlogListItem key={id}>
+              <Link href="/posts/[id]" as={`/posts/${id}`}>
+                {title}
+              </Link>
               <br />
-              {id}
-              <br />
-              {date}
+              <small>
+                <Date dateString={date} />
+              </small>
             </BlogListItem>
           ))}
         </BlogList>
