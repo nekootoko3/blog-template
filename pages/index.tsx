@@ -5,8 +5,17 @@ import Date from "../components/date";
 import { headingMd, headingLg } from "../styles/font";
 import Layout, { siteTitle } from "../components/layout";
 import { getSortedPostsData } from "../lib/posts";
+import { GetStaticProps } from "next";
 
-export default function Home({ allPostsData }) {
+const Home = ({
+  allPostsData,
+}: {
+  allPostsData: {
+    date: string;
+    title: string;
+    id: string;
+  }[];
+}) => {
   return (
     <Layout home>
       <Head>
@@ -36,7 +45,18 @@ export default function Home({ allPostsData }) {
       </HeadingBlog>
     </Layout>
   );
-}
+};
+
+export default Home;
+
+export const getStaticProps: GetStaticProps = async () => {
+  const allPostsData = getSortedPostsData();
+  return {
+    props: {
+      allPostsData,
+    },
+  };
+};
 
 const HeadingBio = styled.section`
   ${headingMd}
@@ -60,12 +80,3 @@ const BlogList = styled.ul`
 const BlogListItem = styled.li`
   margin: 0 0 1.25rem;
 `;
-
-export async function getStaticProps() {
-  const allPostsData = getSortedPostsData();
-  return {
-    props: {
-      allPostsData,
-    },
-  };
-}
