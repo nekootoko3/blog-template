@@ -37,14 +37,13 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-export default function BlogTemplate({
-  Component,
-  pageProps,
-}: AppProps): JSX.Element {
+const BlogTemplate: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <ThemeProvider theme={theme}>
       <Component {...pageProps} />
       <GlobalStyle />
     </ThemeProvider>
   );
-}
+};
+
+export default BlogTemplate;
