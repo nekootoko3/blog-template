@@ -5,7 +5,7 @@ import { heading2Xl, headingLg } from "../styles/font";
 
 type Props = {
   children: React.ReactNode,
-  home: boolean,
+  home?: boolean,
 }
 
 const name = "nekootoko3";

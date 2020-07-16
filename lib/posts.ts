@@ -62,6 +62,6 @@ export const getPostData = async (id: string) => {
   return {
     id,
     contentHtml,
-    ...matterResult.data,
+    ...(matterResult.data as { date: string; title: string }),
   };
 };
