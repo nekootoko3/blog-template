@@ -1,4 +1,4 @@
-import App from "next/app";
+import { AppProps } from "next/app";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 
 const theme = {
@@ -37,14 +37,13 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-export default class BlogTemplate extends App {
-  render() {
-    const { Component, pageProps } = this.props;
-    return (
-      <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
-        <GlobalStyle />
-      </ThemeProvider>
-    );
-  }
-}
+const BlogTemplate: React.FC<AppProps> = ({ Component, pageProps }) => {
+  return (
+    <ThemeProvider theme={theme}>
+      <Component {...pageProps} />
+      <GlobalStyle />
+    </ThemeProvider>
+  );
+};
+
+export default BlogTemplate;

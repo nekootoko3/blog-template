@@ -3,10 +3,15 @@ import Link from "next/link";
 import styled from "styled-components";
 import { heading2Xl, headingLg } from "../styles/font";
 
+type Props = {
+  children: React.ReactNode,
+  home?: boolean,
+}
+
 const name = "nekootoko3";
 export const siteTitle = "nekootoko3 のほのぼの日記";
 
-function Layout({ children, home }) {
+const Layout: React.FC<Props> = ({ children, home }) => {
   return (
     <Container>
       <Head>
