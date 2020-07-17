@@ -3,17 +3,18 @@ import { GetStaticProps, GetStaticPaths } from "next";
 
 import Date from "../../components/date";
 import Layout from "../../components/layout";
-import { getAllPostIds, getPostData } from "../../lib/posts";
+import {
+  getAllPostIds,
+  getPostData,
+  PostDataWithContent,
+} from "../../lib/posts";
+import React from "react";
 
-export default function Post({
-  postData,
-}: {
-  postData: {
-    title: string;
-    date: string;
-    contentHtml: string;
-  };
-}) {
+type Props = {
+  postData: PostDataWithContent;
+};
+
+const Post: React.FC<Props> = ({ postData }) => {
   return (
     <Layout>
       <Head>
@@ -22,13 +23,15 @@ export default function Post({
       <article>
         <h1>{postData.title}</h1>
         <>
-          <Date dateString={postData.date} />
+          <Date dateString={postData.updatedAt} />
         </>
         <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
       </article>
     </Layout>
   );
-}
+};
+
+export default Post;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = getAllPostIds();

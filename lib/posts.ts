@@ -5,30 +5,46 @@ import remark from "remark";
 import html from "remark-html";
 
 type MatterResultData = {
-  date: string;
   title: string;
+  createdAt: string;
+  updatedAt: string;
+  canPublish: boolean;
 };
+
+export type PostData = {
+  id: string;
+} & MatterResultData;
+
+export type PostDataWithContent = {
+  contentHtml: string;
+} & PostData;
+
+type GetSortedPostsData = () => PostData[];
 
 const postsDirectory = path.join(process.cwd(), "posts");
 
-export const getSortedPostsData = () => {
+export const getSortedPostsData: GetSortedPostsData = () => {
   const fileNames = fs.readdirSync(postsDirectory);
-  const allPostsData = fileNames.map((fileName) => {
-    const id = fileName.replace(/\.md$/, "");
+  const allPostsData = fileNames
+    .map((fileName) => {
+      const id = fileName.replace(/\.md$/, "");
 
-    const fullPath = path.join(postsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
+      const fullPath = path.join(postsDirectory, fileName);
+      const fileContents = fs.readFileSync(fullPath, "utf8");
 
-    const matterResult = matter(fileContents);
+      const matterResult = matter(fileContents);
 
-    return {
-      id,
-      ...(matterResult.data as MatterResultData),
-    };
-  });
-  // Sort posts by date
+      return {
+        id,
+        ...(matterResult.data as MatterResultData),
+      };
+    })
+    .filter(({ canPublish }: PostData) => {
+      return canPublish;
+    });
+  // Sort posts by updatedAt
   return allPostsData.sort((a, b) => {
-    if (a.date < b.date) {
+    if (a.updatedAt < b.updatedAt) {
       return 1;
     } else {
       return -1;
@@ -62,6 +78,6 @@ export const getPostData = async (id: string) => {
   return {
     id,
     contentHtml,
-    ...(matterResult.data as { date: string; title: string }),
+    ...(matterResult.data as { updatedAt: string; title: string }),
   };
 };

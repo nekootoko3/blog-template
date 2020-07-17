@@ -4,18 +4,14 @@ import Link from "next/link";
 import Date from "../components/date";
 import { headingMd, headingLg } from "../styles/font";
 import Layout, { siteTitle } from "../components/layout";
-import { getSortedPostsData } from "../lib/posts";
+import { getSortedPostsData, PostData } from "../lib/posts";
 import { GetStaticProps } from "next";
 
-const Home = ({
-  allPostsData,
-}: {
-  allPostsData: {
-    date: string;
-    title: string;
-    id: string;
-  }[];
-}) => {
+type Props = {
+  allPostsData: PostData[];
+};
+
+const Home = ({ allPostsData }: Props) => {
   return (
     <Layout home>
       <Head>
@@ -30,14 +26,14 @@ const Home = ({
       <HeadingBlog>
         <HeadingBlogTitle>Blog</HeadingBlogTitle>
         <BlogList>
-          {allPostsData.map(({ id, date, title }) => (
+          {allPostsData.map(({ id, updatedAt, title }) => (
             <BlogListItem key={id}>
               <Link href="/posts/[id]" as={`/posts/${id}`}>
                 {title}
               </Link>
               <br />
               <small>
-                <Date dateString={date} />
+                <Date dateString={updatedAt} />
               </small>
             </BlogListItem>
           ))}
