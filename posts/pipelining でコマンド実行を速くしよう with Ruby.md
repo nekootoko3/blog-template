@@ -36,7 +36,7 @@ redis には予め `flushall` をしておいて、実行時間も計測する�
 
 実装
 
-```ruby
+```rb
 require 'redis'
 
 redis = Redis.new
@@ -57,7 +57,7 @@ sys     0m1.264s
 
 実装
 
-```ruby
+```rb
 require 'redis'
 
 redis = Redis.new
