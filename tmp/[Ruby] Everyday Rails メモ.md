@@ -1,3 +1,11 @@
+---
+title: "pipelining でコマンド実行を速くしよう with Ruby"
+createdAt: "2019-10-31"
+updatedAt: "2019-10-31"
+canPublish: true
+tag: redis, ruby
+---
+
 ### 2. Rspec のセットアップ
 
 - `binstub` を利用することで、[spring](https://github.com/rails/spring) の恩恵を受けてテストを高速化できる
@@ -64,4 +72,3 @@
   - https://thoughtbot.com/blog/acceptance-tests-at-a-single-level-of-abstraction
 
 ### 9. 速くテストを書き、速いテストを書く
-

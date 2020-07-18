@@ -1,3 +1,11 @@
+---
+title: "メタプログラミングRubyを読んだ.md"
+createdAt: "2020-04-26"
+updatedAt: "2020-04-26"
+canPublish: true
+tag: ruby
+---
+
 ## メタプログラミング Ruby
 
 - メタプログラミング

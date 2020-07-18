@@ -1,3 +1,11 @@
+---
+title: "メソッド呼び出しとmethod_missing"
+createdAt: "2019-10-31"
+updatedAt: "2019-10-31"
+canPublish: true
+tag: redis, ruby
+---
+
 ## [Ruby] メソッド呼び出しと method_missing
 
 Ruby で特定のクラスのインスタンスに対してメソッドを呼び出した時、まずはクラスに存在しているインスタンスメソッドから探す。

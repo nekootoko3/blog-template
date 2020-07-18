@@ -1,3 +1,11 @@
+---
+title: "pipelining でコマンド実行を速くしよう with Ruby"
+createdAt: "2019-10-31"
+updatedAt: "2019-10-31"
+canPublish: true
+tag: redis, ruby
+---
+
 # devise gem で生成されるもの・できること
 
 devise gem は色々勝手にできるらしいと聞いたしチュートリアルを見ると実際にそうらしいので自分でもやってみる
@@ -103,7 +111,7 @@ end
 - controller をカスタマイズしたい
   - `rails generate devise:controllers`
 - oauth を利用したい
-  - omniauth 編に続く
+  - omniauth 編に続く（？）
 
 ## 参照
 

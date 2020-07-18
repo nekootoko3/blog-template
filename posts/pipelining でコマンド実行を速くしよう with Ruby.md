@@ -1,4 +1,10 @@
-## redis
+---
+title: "pipelining でコマンド実行を速くしよう with Ruby"
+createdAt: "2019-10-31"
+updatedAt: "2019-10-31"
+canPublish: true
+tag: redis, ruby
+---
 
 redis は client/server モデルを採用している TCP サーバーなので複数のコマンドを実行したい時に、
 コマンドを送る・結果を受け取る・次のコマンドを送る...とやっていたら全てのコマンドが完了するのに単純化して `RTT(Round Trip Time) * リクエスト数` の時間がかかる。

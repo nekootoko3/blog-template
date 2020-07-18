@@ -1,3 +1,11 @@
+---
+title: "pipelining でコマンド実行を速くしよう with Ruby"
+createdAt: "2019-10-31"
+updatedAt: "2019-10-31"
+canPublish: true
+tag: redis, ruby
+---
+
 rails の `config/routes.rb` で使えるメソッドとそれによって作成される path について。
 重要だと思うメソッドを上に列挙し、それから他のメソッドを追記する。
 resources, resource,

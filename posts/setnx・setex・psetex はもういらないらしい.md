@@ -1,14 +1,20 @@
-## redis の SETNX, SETEX, PSETEX はもういらないらしい
+---
+title: "setnx・setex・psetexはもういらないらしい"
+createdAt: "2019-10-08"
+updatedAt: "2019-10-08"
+canPublish: true
+tag: redis
+---
 
 redis の `SET` のオプションで全て済むという話。
 今まで redis で string を SET する時下記のように使い分けていた
 
 - `SETNX`
   - key が存在しなければ SET、存在しているなら何もしない
-    - `EXISTS + SET` を1つのコマンドで
+    - `EXISTS + SET` を 1 つのコマンドで
 - `SETEX`
   - key を ttl つきで設定する
-    - `SET + expire` を1つのコマンドで
+    - `SET + expire` を 1 つのコマンドで
 - `PSETEX`
   - SETEX とほとんど同じだが、ミリ秒で ttl を設定できる
 
@@ -45,4 +51,3 @@ OK
 ## 参考
 
 - https://redis.io/commands/set
-

@@ -1,8 +1,14 @@
-## Ruby の throw と catch の実例
+---
+title: "throw と catch"
+createdAt: "2020-06-28"
+updatedAt: "2020-06-28"
+canPublish: true
+tag: ruby
+---
 
-Ruby では大体のケースでは例外を begin-raise-rescue で実行箇所を移しているのでは。
+Ruby では大体のケースでは特定のスコープを抜けるためには、関数に切り出して return するか begin-raise-rescue をしている。
 なので `throw` と `catch` を使う機会はあんまりないように思う。
-そんな中、実際に使われているところを見つけたので紹介。
+実際にどういうケースで使っているのかを見てみる。
 
 ### throw と catch を上手く利用しているライブラリ
 

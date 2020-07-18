@@ -1,3 +1,11 @@
+---
+title: "プログラミング TypeScriptを読んだ"
+createdAt: "2019-10-31"
+updatedAt: "2019-10-31"
+canPublish: true
+tag: redis, ruby
+---
+
 # プログラミング TypeScript を読んだ
 
 ### 2章 TypeScript: 全体像

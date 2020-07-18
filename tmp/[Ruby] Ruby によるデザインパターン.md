@@ -1,4 +1,10 @@
-
+---
+title: "pipelining でコマンド実行を速くしよう with Ruby"
+createdAt: ""
+updatedAt: ""
+canPublish: true
+tag: redis, ruby
+---
 
 ### 1. よいプログラムとパターン
 
