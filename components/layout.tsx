@@ -16,6 +16,12 @@ const Layout: React.FC<Props> = ({ children, home }) => {
     <Container>
       <Head>
         <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="stylesheet"
+          href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css"
+        />
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
         <meta
           name="description"
           content="Learn how to build a personal website using Next.js"
