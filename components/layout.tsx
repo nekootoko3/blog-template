@@ -4,9 +4,9 @@ import styled from "styled-components";
 import { heading2Xl, headingLg } from "../styles/font";
 
 type Props = {
-  children: React.ReactNode,
-  home?: boolean,
-}
+  children: React.ReactNode;
+  home?: boolean;
+};
 
 const name = "nekootoko3";
 export const siteTitle = "nekootoko3 のほのぼの日記";
@@ -60,7 +60,7 @@ const Layout: React.FC<Props> = ({ children, home }) => {
       )}
     </Container>
   );
-}
+};
 
 export default Layout;
 
