@@ -22,7 +22,7 @@ throw と catch が使われているのはそれぞれ下記のコード。
 - throw 周辺のコード
   - [Warden::Proxy#authenticate!](https://github.com/wardencommunity/warden/blob/v1.2.8/lib/warden/proxy.rb#L134)
 
-```rb
+```ruby
     def authenticate!(*args)
       user, opts = _perform_authentication(*args)
       throw(:warden, opts) unless user
