@@ -13,7 +13,7 @@ type Props = {
 
 const Home = ({ allPostsData }: Props) => {
   return (
-    <Layout home>
+    <Layout>
       <Head>
         <title>{siteTitle}</title>
       </Head>
