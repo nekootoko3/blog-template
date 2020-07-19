@@ -1,17 +1,25 @@
 import Head from "next/head";
 import Link from "next/link";
-import styled from "styled-components";
-import { heading2Xl, headingLg } from "../styles/font";
+import { useRouter } from "next/router";
+import styled, { css } from "styled-components";
+import { headingLg } from "../styles/font";
 
 type Props = {
   children: React.ReactNode;
-  home?: boolean;
 };
+
+const navivationItems: { label: string; page: string }[] = [
+  { label: "Home", page: "/" },
+  { label: "Blog", page: "/blog" },
+  { label: "Contact", page: "/contact" },
+];
 
 const name = "nekootoko3";
 export const siteTitle = "nekootoko3 のほのぼの日記";
 
-const Layout: React.FC<Props> = ({ children, home }) => {
+const Layout: React.FC<Props> = ({ children }) => {
+  const { pathname } = useRouter();
+
   return (
     <Container>
       <Head>
@@ -36,34 +44,19 @@ const Layout: React.FC<Props> = ({ children, home }) => {
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <Header>
-        {home ? (
-          <>
-            <HeaderHomeImage src="/images/profile.png" alt="name" />
-            <HomeHeading>{name}</HomeHeading>
-          </>
-        ) : (
-          <>
-            <Link href="/">
-              <a>
-                <HeaderImage src="/images/profile.png" alt={name} />
-              </a>
+        <SiteTitle>{siteTitle}</SiteTitle>
+        <AvatarImage src="/images/profile.png" />
+        <NavigationList>
+          {navivationItems.map(({ label, page }) => (
+            <Link href={page}>
+              <NavigationItem selected={pathname === page}>
+                {label}
+              </NavigationItem>
             </Link>
-            <Heading>
-              <Link href="/">
-                <NameLink>{name}</NameLink>
-              </Link>
-            </Heading>
-          </>
-        )}
+          ))}
+        </NavigationList>
       </Header>
       <main>{children}</main>
-      {!home && (
-        <BackToHome>
-          <Link href="/">
-            <a>← Back to home</a>
-          </Link>
-        </BackToHome>
-      )}
     </Container>
   );
 };
@@ -82,28 +75,35 @@ const Header = styled.div`
   align-items: center;
 `;
 
-const HeaderImage = styled.img`
+const SiteTitle = styled.div`
+  ${headingLg}
+  font-size: 1.8rem;
+  text-align: center;
+`;
+
+const AvatarImage = styled.img`
   width: 6rem;
   height: 6rem;
-`;
-const HeaderHomeImage = styled.img`
-  width: 8rem;
-  height: 8rem;
   border-radius: 50%;
 `;
 
-const NameLink = styled.a`
-  color: inherit;
+const NavigationList = styled.div`
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
-const BackToHome = styled.a`
-  margin: 3rem 0 0;
-`;
-
-const HomeHeading = styled.h1`
-  ${heading2Xl}
-`;
-
-const Heading = styled.h2`
-  ${headingLg}
+const NavigationItem = styled.div<{ selected: boolean }>`
+  margin: 0 0.5rem 1rem;
+  font-size: 1.2rem;
+  ${(props) =>
+    props.selected
+      ? css`
+          font-weight: bold;
+        `
+      : css`
+          font-weight: 300;
+          cursor: pointer;
+        `}
 `;
