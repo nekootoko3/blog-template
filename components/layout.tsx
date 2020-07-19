@@ -2,7 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styled, { css } from "styled-components";
-import { heading2Xl, headingLg } from "../styles/font";
+import { headingLg } from "../styles/font";
 
 type Props = {
   children: React.ReactNode;
@@ -44,13 +44,17 @@ const Layout: React.FC<Props> = ({ children }) => {
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <Header>
-        {navivationItems.map(({ label, page }) => (
-          <Link href={page}>
-            <NavigationItem selected={pathname === page}>
-              {label}
-            </NavigationItem>
-          </Link>
-        ))}
+        <SiteTitle>{siteTitle}</SiteTitle>
+        <AvatarImage src="/images/profile.png" />
+        <NavigationList>
+          {navivationItems.map(({ label, page }) => (
+            <Link href={page}>
+              <NavigationItem selected={pathname === page}>
+                {label}
+              </NavigationItem>
+            </Link>
+          ))}
+        </NavigationList>
       </Header>
       <main>{children}</main>
     </Container>
@@ -66,6 +70,25 @@ const Container = styled.div`
 `;
 
 const Header = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const SiteTitle = styled.div`
+  ${headingLg}
+  font-size: 1.8rem;
+  text-align: center;
+`;
+
+const AvatarImage = styled.img`
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+`;
+
+const NavigationList = styled.div`
+  margin-top: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -83,30 +106,4 @@ const NavigationItem = styled.div<{ selected: boolean }>`
           font-weight: 300;
           cursor: pointer;
         `}
-`;
-
-const HeaderImage = styled.img`
-  width: 6rem;
-  height: 6rem;
-`;
-const HeaderHomeImage = styled.img`
-  width: 8rem;
-  height: 8rem;
-  border-radius: 50%;
-`;
-
-const NameLink = styled.a`
-  color: inherit;
-`;
-
-const BackToHome = styled.a`
-  margin: 3rem 0 0;
-`;
-
-const HomeHeading = styled.h1`
-  ${heading2Xl}
-`;
-
-const Heading = styled.h2`
-  ${headingLg}
 `;
