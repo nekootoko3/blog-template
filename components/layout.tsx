@@ -49,7 +49,7 @@ const Layout: React.FC<Props> = ({ children }) => {
         <NavigationList>
           {navivationItems.map(({ label, page }) => (
             <Link href={page}>
-              <NavigationItem selected={pathname === page}>
+              <NavigationItem selected={pathname === page} key={page}>
                 {label}
               </NavigationItem>
             </Link>
