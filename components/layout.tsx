@@ -10,7 +10,7 @@ type Props = {
 
 const navivationItems: { label: string; page: string }[] = [
   { label: "Home", page: "/" },
-  { label: "Blog", page: "/blog" },
+  { label: "Blog", page: "/posts" },
   { label: "Contact", page: "/contact" },
 ];
 
@@ -49,7 +49,7 @@ const Layout: React.FC<Props> = ({ children }) => {
         <NavigationList>
           {navivationItems.map(({ label, page }) => (
             <Link href={page}>
-              <NavigationItem selected={pathname === page}>
+              <NavigationItem selected={pathname === page} key={page}>
                 {label}
               </NavigationItem>
             </Link>
