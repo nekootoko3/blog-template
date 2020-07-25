@@ -54,7 +54,7 @@ const handleGa = () => {
 };
 
 const BlogTemplate: React.FC<AppProps> = ({ Component, pageProps }) => {
-  if (gtag.GaEnabled) {
+  if (process.env.NODE_ENV === "production") {
     handleGa();
   }
 

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import styled, { css } from "styled-components";
 import { headingLg } from "../styles/font";
-import { GaTrackingId, GaEnabled } from "../lib/gtag";
+import { GaTrackingId } from "../lib/gtag";
 
 type Props = {
   children: React.ReactNode;
@@ -20,19 +20,17 @@ export const siteTitle = "nekootoko3 のほのぼの日記";
 
 const Layout: React.FC<Props> = ({ children }) => {
   const { pathname } = useRouter();
-  console.log(process.env.NODE_ENV);
-  console.log(process.env.GA_TRACKING_ID);
 
   return (
     <Container>
       <Head>
-        {GaEnabled && (
+        {process.env.NODE_ENV === "production" && (
           <script
             async
             src={`https://www.googletagmanager.com/gtag/js?id=${GaTrackingId}`}
           />
         )}
-        {GaEnabled && (
+        {process.env.NODE_ENV === "production" && (
           <script
             dangerouslySetInnerHTML={{
               __html: `
