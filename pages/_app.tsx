@@ -1,5 +1,9 @@
+import { useEffect } from "react";
+import Router from "next/router";
 import { AppProps } from "next/app";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
+
+import * as gtag from "../lib/gtag";
 
 const theme = {
   colors: {
@@ -37,7 +41,23 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+const handleGa = () => {
+  useEffect(() => {
+    const handleRouteChange = (url: any) => {
+      gtag.pageview(url);
+    };
+    Router.events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      Router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, []);
+};
+
 const BlogTemplate: React.FC<AppProps> = ({ Component, pageProps }) => {
+  if (gtag.GaEnabled) {
+    handleGa();
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <Component {...pageProps} />
