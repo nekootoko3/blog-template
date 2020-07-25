@@ -20,6 +20,8 @@ export const siteTitle = "nekootoko3 のほのぼの日記";
 
 const Layout: React.FC<Props> = ({ children }) => {
   const { pathname } = useRouter();
+  console.log(process.env.NODE_ENV);
+  console.log(process.env.GA_TRACKING_ID);
 
   return (
     <Container>
