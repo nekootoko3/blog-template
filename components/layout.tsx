@@ -24,26 +24,22 @@ const Layout: React.FC<Props> = ({ children }) => {
   return (
     <Container>
       <Head>
-        {process.env.NODE_ENV === "production" && (
-          <script
-            async
-            src={`https://www.googletagmanager.com/gtag/js?id=${GaTrackingId}`}
-          />
-        )}
-        {process.env.NODE_ENV === "production" && (
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-                    gtag('config', '${GaTrackingId}', {
-                      page_path: window.location.pathname,
-                    });
-                  `,
-            }}
-          />
-        )}
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${GaTrackingId}`}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${GaTrackingId}', {
+                page_path: window.location.pathname,
+              });
+            `,
+          }}
+        />
         <link rel="icon" href="/favicon.ico" />
         <link
           rel="stylesheet"
