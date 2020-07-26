@@ -68,8 +68,8 @@ const Layout: React.FC<Props> = ({ children }) => {
         <AvatarImage src="/images/profile.png" />
         <NavigationList>
           {navivationItems.map(({ label, page }) => (
-            <Link href={page}>
-              <NavigationItem selected={pathname === page} key={page}>
+            <Link href={page} key={page}>
+              <NavigationItem selected={pathname === page}>
                 {label}
               </NavigationItem>
             </Link>
