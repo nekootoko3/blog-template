@@ -1,4 +1,4 @@
-import { Event } from "../GoogleAnalytics/Event";
+import { Event } from "../types/googleAnalytics/event";
 
 export const GA_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || "";
 export const existsGaId = GA_ID !== "";
