@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import styled, { css } from "styled-components";
 import { headingLg } from "../styles/font";
-import { existsGaId, GA_ID } from "../lib/gtag";
 
 type Props = {
   children: React.ReactNode;
@@ -23,46 +22,6 @@ const Layout: React.FC<Props> = ({ children }) => {
 
   return (
     <Container>
-      <Head>
-        {existsGaId ? (
-          <>
-            <script
-              async
-              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-            />
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', '${GA_ID}', {
-                    page_path: window.location.pathname,
-                  });`,
-              }}
-            />
-          </>
-        ) : null}
-        <link rel="icon" href="/favicon.ico" />
-        <link
-          rel="stylesheet"
-          href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css"
-        />
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script>
-        <meta
-          name="description"
-          content="Learn how to build a personal website using Next.js"
-        />
-        <meta
-          property="og:image"
-          content={`https://og-image.now.sh/${encodeURI(
-            siteTitle
-          )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
-        />
-        <meta name="og:title" content={siteTitle} />
-        <meta name="twitter:card" content="summary_large_image" />
-      </Head>
       <Header>
         <SiteTitle>{siteTitle}</SiteTitle>
         <AvatarImage src="/images/profile.png" />
