@@ -1,6 +1,11 @@
-import Document, { DocumentContext, Main, NextScript } from "next/document";
+import Document, {
+  DocumentContext,
+  Html,
+  Main,
+  Head,
+  NextScript,
+} from "next/document";
 import { ServerStyleSheet } from "styled-components";
-import Head from "next/head";
 
 import { existsGaId, GA_ID } from "../lib/gtag";
 import { siteTitle } from "../components/layout";
@@ -34,7 +39,7 @@ export default class BlogTemplate extends Document {
 
   render() {
     return (
-      <html>
+      <Html lang="ja">
         <Head>
           {existsGaId ? (
             <>
@@ -73,7 +78,7 @@ export default class BlogTemplate extends Document {
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     );
   }
 }
