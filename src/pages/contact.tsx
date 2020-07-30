@@ -12,7 +12,7 @@ const contacts: { icon: string; link: string }[] = [
   },
 ];
 
-export default () => {
+const Contact = () => {
   return (
     <Layout>
       <ContactList>
@@ -29,6 +29,8 @@ export default () => {
     </Layout>
   );
 };
+
+export default Contact;
 
 const ContactList = styled.div`
   display: flex;
