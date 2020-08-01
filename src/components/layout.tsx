@@ -13,8 +13,7 @@ const navivationItems: { label: string; page: string }[] = [
   { label: "Contact", page: "/contact" },
 ];
 
-const name = "nekootoko3";
-export const siteTitle = "nekootoko3 のほのぼの日記";
+export const siteTitle = "nekootoko3 のホームページ";
 
 const Layout: React.FC<Props> = ({ children }) => {
   const { pathname } = useRouter();
