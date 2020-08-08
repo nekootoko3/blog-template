@@ -11,39 +11,39 @@ type MatterResultData = {
   canPublish: boolean;
 };
 
-export type PostData = {
-  id: string;
+export type BlogData = {
+  slug: string;
 } & MatterResultData;
 
-export type PostDataWithContent = {
+export type BlogDataWithContent = {
   contentHtml: string;
-} & PostData;
+} & BlogData;
 
-type GetSortedPostsData = () => PostData[];
+type GetSortedBlogsData = () => BlogData[];
 
-const postsDirectory = path.join(process.cwd(), "posts");
+const blogsDirectory = path.join(process.cwd(), "blogs");
 
-export const getSortedPostsData: GetSortedPostsData = () => {
-  const fileNames = fs.readdirSync(postsDirectory);
-  const allPostsData = fileNames
+export const getSortedBlogsData: GetSortedBlogsData = () => {
+  const fileNames = fs.readdirSync(blogsDirectory);
+  const allBlogsData = fileNames
     .map((fileName) => {
-      const id = fileName.replace(/\.md$/, "");
+      const slug = fileName.replace(/\.md$/, "");
 
-      const fullPath = path.join(postsDirectory, fileName);
+      const fullPath = path.join(blogsDirectory, fileName);
       const fileContents = fs.readFileSync(fullPath, "utf8");
 
       const matterResult = matter(fileContents);
 
       return {
-        id,
+        slug,
         ...(matterResult.data as MatterResultData),
       };
     })
-    .filter(({ canPublish }: PostData) => {
+    .filter(({ canPublish }: BlogData) => {
       return canPublish;
     });
-  // Sort posts by updatedAt
-  return allPostsData.sort((a, b) => {
+  // Sort blogs by updatedAt
+  return allBlogsData.sort((a, b) => {
     if (a.updatedAt < b.updatedAt) {
       return 1;
     } else {
@@ -52,20 +52,20 @@ export const getSortedPostsData: GetSortedPostsData = () => {
   });
 };
 
-export const getAllPostIds = () => {
-  const fileNames = fs.readdirSync(postsDirectory);
+export const getAllBlogSlugs = () => {
+  const fileNames = fs.readdirSync(blogsDirectory);
 
   return fileNames.map((fileName) => {
     return {
       params: {
-        id: fileName.replace(/\.md$/, ""),
+        slug: fileName.replace(/\.md$/, ""),
       },
     };
   });
 };
 
-export const getPostData = async (id: string) => {
-  const fullPath = path.join(postsDirectory, `${id}.md`);
+export const getBlogData = async (slug: string) => {
+  const fullPath = path.join(blogsDirectory, `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
 
   const matterResult = matter(fileContents);
@@ -76,7 +76,7 @@ export const getPostData = async (id: string) => {
   const contentHtml = processedContent.toString();
 
   return {
-    id,
+    slug,
     contentHtml,
     ...(matterResult.data as { updatedAt: string; title: string }),
   };

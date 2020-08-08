@@ -3,15 +3,15 @@ import Head from "next/head";
 import Date from "../../components/date";
 import Layout from "../../components/layout";
 import { headingMd, headingLg } from "../../styles/font";
-import { getSortedPostsData, PostData } from "../../lib/posts";
+import { getSortedBlogsData, BlogData } from "../../lib/blogs";
 import { GetStaticProps } from "next";
 import styled from "styled-components";
 
 type Props = {
-  allPostsData: PostData[];
+  allBlogsData: BlogData[];
 };
 
-const Post: React.FC<Props> = ({ allPostsData }) => {
+const Blog: React.FC<Props> = ({ allBlogsData }) => {
   return (
     <Layout>
       <Head>
@@ -20,9 +20,9 @@ const Post: React.FC<Props> = ({ allPostsData }) => {
       <HeadingBlog>
         <HeadingBlogTitle>Blog</HeadingBlogTitle>
         <BlogList>
-          {allPostsData.map(({ id, updatedAt, title }) => (
-            <BlogListItem key={id}>
-              <Link href="/posts/[id]" as={`/posts/${id}`}>
+          {allBlogsData.map(({ slug, updatedAt, title }) => (
+            <BlogListItem key={slug}>
+              <Link href="/blogs/[slug]" as={`/blogs/${slug}`}>
                 {title}
               </Link>
               <br />
@@ -37,13 +37,13 @@ const Post: React.FC<Props> = ({ allPostsData }) => {
   );
 };
 
-export default Post;
+export default Blog;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const allPostsData = getSortedPostsData();
+  const allBlogsData = getSortedBlogsData();
   return {
     props: {
-      allPostsData,
+      allBlogsData,
     },
   };
 };

@@ -4,21 +4,21 @@ import { GetStaticProps, GetStaticPaths } from "next";
 import Date from "../../components/date";
 import Layout from "../../components/layout";
 import {
-  getAllPostIds,
-  getPostData,
-  PostDataWithContent,
-} from "../../lib/posts";
+  getAllBlogSlugs,
+  getBlogData,
+  BlogDataWithContent,
+} from "../../lib/blogs";
 import React from "react";
 
 type Props = {
-  postData: PostDataWithContent;
+  blogData: BlogDataWithContent;
 };
 
-const Post: React.FC<Props> = ({ postData }) => {
+const Blog: React.FC<Props> = ({ blogData }) => {
   return (
     <Layout>
       <Head>
-        <title>{postData.title}</title>
+        <title>{blogData.title}</title>
         <link
           rel="stylesheet"
           href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css"
@@ -27,20 +27,20 @@ const Post: React.FC<Props> = ({ postData }) => {
         <script>hljs.initHighlightingOnLoad();</script>
       </Head>
       <article>
-        <h1>{postData.title}</h1>
+        <h1>{blogData.title}</h1>
         <>
-          <Date dateString={postData.updatedAt} />
+          <Date dateString={blogData.updatedAt} />
         </>
-        <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+        <div dangerouslySetInnerHTML={{ __html: blogData.contentHtml }} />
       </article>
     </Layout>
   );
 };
 
-export default Post;
+export default Blog;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = getAllPostIds();
+  const paths = getAllBlogSlugs();
   return {
     paths,
     fallback: false,
@@ -48,10 +48,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const postData = await getPostData(params ? (params.id as string) : "");
+  const blogData = await getBlogData(params ? (params.slug as string) : "");
   return {
     props: {
-      postData,
+      blogData,
     },
   };
 };
