@@ -3,7 +3,7 @@ title: "setnx・setex・psetexはもういらないらしい"
 createdAt: "2019-10-08"
 updatedAt: "2019-10-08"
 canPublish: true
-tag: redis
+tags: redis
 ---
 
 redis の `SET` のオプションで全て済むという話。

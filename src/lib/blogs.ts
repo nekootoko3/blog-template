@@ -13,6 +13,7 @@ type MatterResultData = {
 
 export type BlogData = {
   slug: string;
+  tags: string[];
 } & MatterResultData;
 
 export type BlogDataWithContent = {
@@ -33,10 +34,14 @@ export const getSortedBlogsData: GetSortedBlogsData = () => {
       const fileContents = fs.readFileSync(fullPath, "utf8");
 
       const matterResult = matter(fileContents);
+      const tags = matterResult.data.tags?.split(",")?.map((tag: string) => {
+        return tag.trim();
+      }) as string[];
 
       return {
-        slug,
         ...(matterResult.data as MatterResultData),
+        slug,
+        tags,
       };
     })
     .filter(({ canPublish }: BlogData) => {

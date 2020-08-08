@@ -3,7 +3,7 @@ title: "pipelining でコマンド実行を速くしよう with Ruby"
 createdAt: "2019-10-31"
 updatedAt: "2019-10-31"
 canPublish: true
-tag: redis, ruby
+tags: redis, ruby
 ---
 
 redis は client/server モデルを採用している TCP サーバーなので複数のコマンドを実行したい時に、

@@ -1,11 +1,13 @@
+import { GetStaticProps } from "next";
 import Link from "next/link";
 import Head from "next/head";
+import styled from "styled-components";
+
 import Date from "../../components/date";
+import Tag from "../../components/tag";
 import Layout from "../../components/layout";
 import { headingMd, headingLg } from "../../styles/font";
 import { getSortedBlogsData, BlogData } from "../../lib/blogs";
-import { GetStaticProps } from "next";
-import styled from "styled-components";
 
 type Props = {
   allBlogsData: BlogData[];
@@ -20,14 +22,16 @@ const Blog: React.FC<Props> = ({ allBlogsData }) => {
       <HeadingBlog>
         <HeadingBlogTitle>Blog</HeadingBlogTitle>
         <BlogList>
-          {allBlogsData.map(({ slug, updatedAt, title }) => (
+          {allBlogsData.map(({ slug, updatedAt, title, tags }: BlogData) => (
             <BlogListItem key={slug}>
               <Link href="/blogs/[slug]" as={`/blogs/${slug}`}>
-                {title}
+                <BlogTitle>{title}</BlogTitle>
               </Link>
-              <br />
               <small>
                 <Date dateString={updatedAt} />
+                {tags.map((tag) => (
+                  <Tag name={tag} key={tag} />
+                ))}
               </small>
             </BlogListItem>
           ))}
@@ -65,4 +69,8 @@ const BlogList = styled.ul`
 
 const BlogListItem = styled.li`
   margin: 0 0 1.25rem;
+`;
+
+const BlogTitle = styled.div`
+  cursor: pointer;
 `;
