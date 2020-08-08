@@ -9,7 +9,7 @@ type Props = {
 
 const navivationItems: { label: string; page: string }[] = [
   { label: "Home", page: "/" },
-  { label: "Blog", page: "/posts" },
+  { label: "Blog", page: "/blogs" },
   { label: "Contact", page: "/contact" },
 ];
 
