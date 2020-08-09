@@ -31,12 +31,13 @@ const handleColorType = (name: string) => {
 };
 
 const Container = styled.div<{ name: string }>`
-  padding: 0 10px;
+  font-size: 1rem;
+  padding: 0 0.6rem;
   background-color: ${({ name }) => handleColorType(name)};
   color: white;
-  border-radius: 20px;
+  border-radius: 1rem;
 
   &:nth-child(n + 2) {
-    margin-left: 5px;
+    margin-left: 0.1rem;
   }
 `;
