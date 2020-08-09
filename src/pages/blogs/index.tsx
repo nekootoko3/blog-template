@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { GetStaticProps } from "next";
 import Link from "next/link";
 import Head from "next/head";
@@ -14,6 +15,28 @@ type Props = {
 };
 
 const Blog: React.FC<Props> = ({ allBlogsData }) => {
+  const [selectedTags, setTags] = useState([] as string[]);
+
+  const addTag = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!e.currentTarget.textContent) {
+      return;
+    }
+    if (!selectedTags.includes(e.currentTarget.textContent)) {
+      setTags(selectedTags.concat(e.currentTarget.textContent));
+    }
+  };
+
+  const removeTag = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!e.currentTarget.textContent) {
+      return;
+    }
+    setTags(
+      selectedTags.filter((selectedTag) => {
+        return selectedTag !== e.currentTarget.textContent;
+      })
+    );
+  };
+
   return (
     <Layout>
       <Head>
@@ -21,6 +44,11 @@ const Blog: React.FC<Props> = ({ allBlogsData }) => {
       </Head>
       <HeadingBlog>
         <HeadingBlogTitle>Blog</HeadingBlogTitle>
+        <SelectedTags>
+          {selectedTags.map((selectedTag) => (
+            <Tag name={selectedTag} handleClick={removeTag} key={selectedTag} />
+          ))}
+        </SelectedTags>
         <BlogList>
           {allBlogsData.map(({ slug, updatedAt, title, tags }: BlogData) => (
             <BlogListItem key={slug}>
@@ -30,7 +58,7 @@ const Blog: React.FC<Props> = ({ allBlogsData }) => {
               <small>
                 <Date dateString={updatedAt} />
                 {tags.map((tag) => (
-                  <Tag name={tag} key={tag} />
+                  <Tag name={tag} key={tag} handleClick={addTag} />
                 ))}
               </small>
             </BlogListItem>
@@ -60,6 +88,8 @@ const HeadingBlog = styled.section`
 const HeadingBlogTitle = styled.div`
   ${headingLg}
 `;
+
+const SelectedTags = styled.div``;
 
 const BlogList = styled.ul`
   list-style: none;
