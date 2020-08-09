@@ -57,9 +57,11 @@ const Blog: React.FC<Props> = ({ allBlogsData }) => {
               </Link>
               <small>
                 <Date dateString={updatedAt} />
-                {tags.map((tag) => (
-                  <Tag name={tag} key={tag} handleClick={addTag} />
-                ))}
+                <BlogTags>
+                  {tags.map((tag) => (
+                    <Tag name={tag} key={tag} handleClick={addTag} />
+                  ))}
+                </BlogTags>
               </small>
             </BlogListItem>
           ))}
@@ -89,7 +91,13 @@ const HeadingBlogTitle = styled.div`
   ${headingLg}
 `;
 
-const SelectedTags = styled.div``;
+const SelectedTags = styled.div`
+  display: flex;
+`;
+
+const BlogTags = styled.div`
+  display: flex;
+`;
 
 const BlogList = styled.ul`
   list-style: none;
