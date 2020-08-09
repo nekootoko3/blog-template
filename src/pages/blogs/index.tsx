@@ -37,6 +37,18 @@ const Blog: React.FC<Props> = ({ allBlogsData }) => {
     );
   };
 
+  const isShowableBlog = (tags: string[]) => {
+    if (selectedTags.length === 0) {
+      return true;
+    }
+
+    return (
+      selectedTags.filter((selectedTag) => {
+        return tags.includes(selectedTag);
+      }).length !== 0
+    );
+  };
+
   return (
     <Layout>
       <Head>
@@ -50,21 +62,27 @@ const Blog: React.FC<Props> = ({ allBlogsData }) => {
           ))}
         </SelectedTags>
         <BlogList>
-          {allBlogsData.map(({ slug, updatedAt, title, tags }: BlogData) => (
-            <BlogListItem key={slug}>
-              <Link href="/blogs/[slug]" as={`/blogs/${slug}`}>
-                <BlogTitle>{title}</BlogTitle>
-              </Link>
-              <small>
-                <Date dateString={updatedAt} />
-                <BlogTags>
-                  {tags.map((tag) => (
-                    <Tag name={tag} key={tag} handleClick={addTag} />
-                  ))}
-                </BlogTags>
-              </small>
-            </BlogListItem>
-          ))}
+          {allBlogsData.map(({ slug, updatedAt, title, tags }: BlogData) => {
+            if (!isShowableBlog(tags)) {
+              return;
+            }
+
+            return (
+              <BlogListItem key={slug}>
+                <Link href="/blogs/[slug]" as={`/blogs/${slug}`}>
+                  <BlogTitle>{title}</BlogTitle>
+                </Link>
+                <small>
+                  <Date dateString={updatedAt} />
+                  <BlogTags>
+                    {tags.map((tag) => (
+                      <Tag name={tag} key={tag} handleClick={addTag} />
+                    ))}
+                  </BlogTags>
+                </small>
+              </BlogListItem>
+            );
+          })}
         </BlogList>
       </HeadingBlog>
     </Layout>
