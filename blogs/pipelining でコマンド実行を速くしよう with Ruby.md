@@ -1,5 +1,6 @@
 ---
-title: "pipelining でコマンド実行を速くしよう with Ruby"
+title: "redis の pipelining でコマンド実行を速くしよう with Ruby"
+slug: redis-pipelining
 createdAt: "2019-10-31"
 updatedAt: "2019-10-31"
 canPublish: true

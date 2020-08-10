@@ -1,5 +1,6 @@
 ---
 title: "throw と catch"
+slug: throw-catch
 createdAt: "2020-06-28"
 updatedAt: "2020-06-28"
 canPublish: true

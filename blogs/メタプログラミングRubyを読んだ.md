@@ -1,5 +1,6 @@
 ---
 title: "メタプログラミングRubyを読んだ.md"
+slug: reading-metaprogramming-ruby
 createdAt: "2020-04-26"
 updatedAt: "2020-04-26"
 canPublish: true

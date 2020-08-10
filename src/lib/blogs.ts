@@ -6,6 +6,7 @@ import html from "remark-html";
 
 type MatterResultData = {
   title: string;
+  slug: string;
   createdAt: string;
   updatedAt: string;
   canPublish: boolean;
@@ -28,8 +29,6 @@ export const getSortedBlogsData: GetSortedBlogsData = () => {
   const fileNames = fs.readdirSync(blogsDirectory);
   const allBlogsData = fileNames
     .map((fileName) => {
-      const slug = fileName.replace(/\.md$/, "");
-
       const fullPath = path.join(blogsDirectory, fileName);
       const fileContents = fs.readFileSync(fullPath, "utf8");
 
@@ -40,7 +39,6 @@ export const getSortedBlogsData: GetSortedBlogsData = () => {
 
       return {
         ...(matterResult.data as MatterResultData),
-        slug,
         tags,
       };
     })

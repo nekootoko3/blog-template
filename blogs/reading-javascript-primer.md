@@ -1,5 +1,6 @@
 ---
 title: "JavaScript Primer を読んだ"
+slug: reading-javascript-primer
 createdAt: "2020-07-11"
 updatedAt: "2020-07-11"
 canPublish: true
