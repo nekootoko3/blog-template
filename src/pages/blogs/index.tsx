@@ -55,36 +55,45 @@ const Blog: React.FC<Props> = ({ allBlogsData }) => {
         <title>Blog</title>
       </Head>
       <HeadingBlog>
-        <HeadingBlogTitle>Blog</HeadingBlogTitle>
-        <SelectedTags>
-          {selectedTags.map((selectedTag) => (
-            <Tag name={selectedTag} handleClick={removeTag} key={selectedTag} />
-          ))}
-        </SelectedTags>
-        <BlogList>
-          {allBlogsData.map(({ slug, updatedAt, title, tags }: BlogData) => {
-            if (!isShowableBlog(tags)) {
-              return;
-            }
-
-            return (
-              <BlogListItem key={slug}>
-                <Link href="/blogs/[slug]" as={`/blogs/${slug}`}>
-                  <BlogTitle>{title}</BlogTitle>
-                </Link>
-                <small>
-                  <Date dateString={updatedAt} />
-                  <BlogTags>
-                    {tags.map((tag) => (
-                      <Tag name={tag} key={tag} handleClick={addTag} />
-                    ))}
-                  </BlogTags>
-                </small>
-              </BlogListItem>
-            );
-          })}
-        </BlogList>
+        <SelectedTagsWrapper>
+          <TagsHeader>Tags:</TagsHeader>
+          <SelectedTags>
+            {selectedTags.map((selectedTag) => (
+              <Tag
+                name={selectedTag}
+                handleClick={removeTag}
+                key={selectedTag}
+              />
+            ))}
+          </SelectedTags>
+        </SelectedTagsWrapper>
       </HeadingBlog>
+      <BlogList>
+        {allBlogsData.map(({ slug, updatedAt, title, tags }: BlogData) => {
+          if (!isShowableBlog(tags)) {
+            return;
+          }
+
+          return (
+            <BlogListItem key={slug}>
+              <Link href="/blogs/[slug]" as={`/blogs/${slug}`}>
+                <BlogTitle>{title}</BlogTitle>
+              </Link>
+              <DateWrapper>
+                <Date dateString={updatedAt} />
+              </DateWrapper>
+              <TagsWrapper>
+                {" "}
+                <BlogTags>
+                  {tags.map((tag) => (
+                    <Tag name={tag} key={tag} handleClick={addTag} />
+                  ))}
+                </BlogTags>
+              </TagsWrapper>
+            </BlogListItem>
+          );
+        })}
+      </BlogList>
     </Layout>
   );
 };
@@ -109,6 +118,15 @@ const HeadingBlogTitle = styled.div`
   ${headingLg}
 `;
 
+const SelectedTagsWrapper = styled.div`
+  font-size: 0.8rem;
+  display: flex;
+`;
+
+const TagsHeader = styled.div`
+  margin-right: 0.2rem;
+`;
+
 const SelectedTags = styled.div`
   display: flex;
 `;
@@ -120,7 +138,7 @@ const BlogTags = styled.div`
 const BlogList = styled.ul`
   list-style: none;
   padding: 0px;
-  margin: 0px;
+  margin: 1rem 0 0;
 `;
 
 const BlogListItem = styled.li`
@@ -129,4 +147,12 @@ const BlogListItem = styled.li`
 
 const BlogTitle = styled.div`
   cursor: pointer;
+`;
+
+const DateWrapper = styled.div`
+  font-size: 1rem;
+`;
+
+const TagsWrapper = styled.div`
+  margin-top: 0.1rem;
 `;
