@@ -147,6 +147,10 @@ const BlogListItem = styled.li`
 
 const BlogTitle = styled.div`
   cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const DateWrapper = styled.div`
