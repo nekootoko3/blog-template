@@ -1,9 +1,10 @@
 ---
 title: "throw と catch"
+slug: throw-catch
 createdAt: "2020-06-28"
 updatedAt: "2020-06-28"
 canPublish: true
-tag: ruby
+tags: ruby
 ---
 
 Ruby では大体のケースでは特定のスコープを抜けるためには、関数に切り出して return するか begin-raise-rescue をしている。

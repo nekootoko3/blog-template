@@ -6,6 +6,7 @@ import html from "remark-html";
 
 type MatterResultData = {
   title: string;
+  slug: string;
   createdAt: string;
   updatedAt: string;
   canPublish: boolean;
@@ -13,6 +14,7 @@ type MatterResultData = {
 
 export type BlogData = {
   slug: string;
+  tags: string[];
 } & MatterResultData;
 
 export type BlogDataWithContent = {
@@ -27,16 +29,17 @@ export const getSortedBlogsData: GetSortedBlogsData = () => {
   const fileNames = fs.readdirSync(blogsDirectory);
   const allBlogsData = fileNames
     .map((fileName) => {
-      const slug = fileName.replace(/\.md$/, "");
-
       const fullPath = path.join(blogsDirectory, fileName);
       const fileContents = fs.readFileSync(fullPath, "utf8");
 
       const matterResult = matter(fileContents);
+      const tags = matterResult.data.tags?.split(",")?.map((tag: string) => {
+        return tag.trim();
+      }) as string[];
 
       return {
-        slug,
         ...(matterResult.data as MatterResultData),
+        tags,
       };
     })
     .filter(({ canPublish }: BlogData) => {
