@@ -7,7 +7,7 @@ import styled from "styled-components";
 import Date from "../../components/date";
 import Tag from "../../components/tag";
 import Layout from "../../components/layout";
-import { headingMd, headingLg } from "../../styles/font";
+import { headingMd } from "../../styles/font";
 import { getSortedBlogsData, BlogData } from "../../lib/blogs";
 
 type Props = {
@@ -16,7 +16,6 @@ type Props = {
 
 const Blog: React.FC<Props> = ({ allBlogsData }) => {
   const [selectedTags, setTags] = useState([] as string[]);
-
   const addTag = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!e.currentTarget.textContent) {
       return;
@@ -112,10 +111,6 @@ export const getStaticProps: GetStaticProps = async () => {
 const HeadingBlog = styled.section`
   ${headingMd}
   padding-top: 1px;
-`;
-
-const HeadingBlogTitle = styled.div`
-  ${headingLg}
 `;
 
 const SelectedTagsWrapper = styled.div`
